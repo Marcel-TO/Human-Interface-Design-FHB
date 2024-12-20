@@ -33,6 +33,7 @@ export class BackendService {
   }
 
   public addRegistration(registration: any, page: number) {
+    console.log(registration);
     this.http.post('http://localhost:5000/registrations', registration).subscribe(_ => {
       this.getRegistrations(page);
     })
