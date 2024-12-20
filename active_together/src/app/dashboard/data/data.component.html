@@ -1,80 +1,152 @@
-<div class="data-container">
-  <div class="grid">
-    <div class="row header-row row-cols-md-10 row-cols-sx-12">
-      <div class="col">Kurs</div>
-      <div class="col">Veranstaltungsort</div>
-      <div class="col">Adresse des Veranstaltungsortes</div>
-      <div class="col">Öffentlich erreichbar?</div>
-      <div class="col">Kursleiter</div>
-      <div class="col">Alle Termine</div>
-    </div>
+<div class="data-component-container">
+  <section class="data-container">
+    <h1>Kurse</h1>
+    <div class="grid">
+      <div class="row header-row row-cols-md-10 row-cols-sx-12">
+        <div class="col">Kurs</div>
+        <div class="col">Veranstaltungsort</div>
+        <div class="col">Adresse des Veranstaltungsortes</div>
+        <div class="col">Öffentlich erreichbar?</div>
+        <div class="col">Kursleiter</div>
+        <div class="col">Alle Termine</div>
+      </div>
 
-    <div
-      *ngFor="let course of storeService.courses"
-      class="row row-cols-md-10 row-cols-sm-12"
-    >
       <div
-        class="col truncate"
-        #tooltip="matTooltip"
-        matTooltipPosition="above"
-        [matTooltip]="course.name"
+        *ngFor="let course of storeService.courses"
+        class="row data-row row-cols-md-10 row-cols-sm-12"
       >
-        {{ course.name }}
-      </div>
-      <div
-        class="col truncate"
-        #tooltip="matTooltip"
-        matTooltipPosition="above"
-        [matTooltip]="course.eventLocation.name"
-      >
-        {{ course.eventLocation.name }}
-      </div>
-      <div
-        class="col truncate"
-        #tooltip="matTooltip"
-        matTooltipPosition="above"
-        [matTooltip]="course.eventLocation.address"
-      >
-        {{ course.eventLocation.address }}
-      </div>
-      <div
-        class="col truncate"
-        #tooltip="matTooltip"
-        matTooltipPosition="above"
-        [matTooltip]="
-          course.eventLocation.venueByPublicTansport == true ? 'Ja' : 'Nein'
-        "
-      >
-        {{ course.eventLocation.venueByPublicTansport == true ? "Ja" : "Nein" }}
-      </div>
-      <div
-        class="col truncate"
-        #tooltip="matTooltip"
-        matTooltipPosition="above"
-        [matTooltip]="course.instructor"
-      >
-        {{ course.instructor }}
-      </div>
-      <div class="col truncate">
-        <ul>
-          <li class="truncate" *ngFor="let date of course.dates">
-            <span
-              #tooltip="matTooltip"
-              [matTooltip]="
-                date.begin
-                  | date
-                    : 'MMM dd, yyyy \'um\' hh:mm a' +
-                        ' - ' +
-                        (date.end | date : 'MMM dd, yyyy \'um\' hh:mm a')
-              "
-              matTooltipPosition="above"
-              >{{ date.begin | date : "MMM dd, yyyy 'um' hh:mm a" }} -
-              {{ date.end | date : "MMM dd, yyyy 'um' hh:mm a" }}</span
-            >
-            >
-          </li>
-        </ul>
+        <div class="col data-col">
+          <div
+            class="truncate"
+            #tooltip="matTooltip"
+            matTooltipPosition="above"
+            [matTooltip]="course.name"
+          >
+            {{ course.name }}
+          </div>
+        </div>
+        <div class="col data-col">
+          <div
+            class="truncate"
+            #tooltip="matTooltip"
+            matTooltipPosition="above"
+            [matTooltip]="course.eventLocation.name"
+          >
+            {{ course.eventLocation.name }}
+          </div>
+        </div>
+        <div class="col data-col">
+          <div
+            class="truncate"
+            #tooltip="matTooltip"
+            matTooltipPosition="above"
+            [matTooltip]="course.eventLocation.address"
+          >
+            {{ course.eventLocation.address }}
+          </div>
+        </div>
+        <div class="col data-col">
+          <div
+            class="truncate"
+            #tooltip="matTooltip"
+            matTooltipPosition="above"
+            [matTooltip]="
+              course.eventLocation.venueByPublicTansport == true ? 'Ja' : 'Nein'
+            "
+          >
+            {{
+              course.eventLocation.venueByPublicTansport == true ? "Ja" : "Nein"
+            }}
+          </div>
+        </div>
+        <div class="col data-col">
+          <div
+            class="truncate"
+            #tooltip="matTooltip"
+            matTooltipPosition="above"
+            [matTooltip]="course.instructor"
+          >
+            {{ course.instructor }}
+          </div>
+        </div>
+        <div class="col data-col">
+          <span
+            *ngFor="let date of course.dates"
+            class="truncate"
+            #tooltip="matTooltip"
+            [matTooltip]="
+              date.begin
+                | date
+                  : 'MMM dd, yyyy \'um\' hh:mm a' +
+                      ' - ' +
+                      (date.end | date : 'MMM dd, yyyy \'um\' hh:mm a')
+            "
+            matTooltipPosition="above"
+            >{{ date.begin | date : "MMM dd, yyyy 'um' hh:mm a" }} -
+            {{ date.end | date : "MMM dd, yyyy 'um' hh:mm a" }}</span
+          >
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="registration-table-container">
+    <h1>Registrierungen</h1>
+    <div class="data-container">
+      <div class="grid">
+        <div class="row header-row row-cols-md-10 row-cols-sx-12">
+          <div class="col">Name</div>
+          <div class="col">Geburtsdatum</div>
+          <div class="col">Kurs</div>
+        </div>
+        <div
+          *ngFor="let registration of storeService.registrations"
+          class="row data-row row-cols-md-10 row-cols-sm-12"
+        >
+          <div class="col data-col">
+            <div
+              class="truncate"
+              #tooltip="matTooltip"
+              matTooltipPosition="above"
+              [matTooltip]="registration.name"
+            >
+              {{ registration.name }}
+            </div>
+          </div>
+          <div class="col data-col">
+            <div
+              class="truncate"
+              #tooltip="matTooltip"
+              matTooltipPosition="above"
+              [matTooltip]="registration.birthdate"
+            >
+              {{ registration.birthdate }}
+            </div>
+          </div>
+          <div class="col data-col">
+            <div
+              class="truncate"
+              #tooltip="matTooltip"
+              matTooltipPosition="above"
+              [matTooltip]="registration.course.name"
+            >
+              {{ registration.course.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagination-container">
+    <button
+      mat-button
+      [ngClass]="page == storeService.currentPage ? 'active' : ''"
+      (click)="selectPage(page)"
+      type="button"
+      *ngFor="let page of returnAllPages()"
+    >
+      {{ page }}
+    </button>
+  </section>
 </div>

@@ -1,3 +1,11 @@
+.data-component-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
 .data-container {
   width: 100%;
   margin: 0;
@@ -14,16 +22,55 @@
   color: white;
   padding: 0.5rem;
   display: flex;
+}
+
+.row {
   min-width: 1000px;
+  margin: 0;
+  position: relative;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.col {
+  display: grid;
+  place-content: center;
+  padding: 0;
+}
+
+.data-col:hover {
+  transform: scale(1.04);
+  transition: all 0.3s;
+  background-color: #f2f2f2;
+}
+
+.data-col {
+  border: 1px solid black;
+}
+
+.data-row:nth-child(odd) {
+  background-color: #f2f2f2;
 }
 
 .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 90%;
 }
 
-button.active {
-  background-color: orange;
+.registration-table-container {
+  margin: 4rem 0;
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1rem 0;
+  transition: all 0.3s;
+}
+
+.pagination-container button.active {
+  background-color: #38bdf8;
+  color: white;
 }

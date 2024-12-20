@@ -3,12 +3,13 @@ import { SharedModule } from '../../shared/shared.module';
 import { StoreService } from '../../shared/store.service';
 import { BackendService } from '../../shared/backend.service';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-data',
   standalone: true,
-  imports: [SharedModule, MatTooltipModule],
+  imports: [SharedModule, MatTooltipModule, MatButtonModule],
   templateUrl: './data.component.html',
   styleUrl: './data.component.css'
 })
