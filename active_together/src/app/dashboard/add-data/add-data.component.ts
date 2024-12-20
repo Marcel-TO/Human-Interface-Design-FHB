@@ -7,6 +7,7 @@ import {
   FormGroupDirective,
   NgForm,
   ReactiveFormsModule,
+  FormGroup,
 } from '@angular/forms';
 import { StoreService } from '../../shared/store.service';
 import { BackendService } from '../../shared/backend.service';
@@ -33,14 +34,12 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
   ], // Import der benötigten Module
   providers: [
-    MatDatepickerModule,
-    MatNativeDateModule,
-    {provide: DateAdapter, useClass: NativeDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS},
-  ], // Provider für das Datum
+    MatDatepickerModule  ], // Provider für das Datum
   templateUrl: './add-data.component.html',
   styleUrls: ['./add-data.component.css'],
 })
 export class AddDataComponent implements OnInit {
+    public registrationForm: FormGroup;
     nameFormControl = new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3),
@@ -63,8 +62,22 @@ export class AddDataComponent implements OnInit {
     private formbuilder: FormBuilder,
     public storeService: StoreService,
     private backendService: BackendService
-  ) {}
-  public registrationForm: any;
+  ) {
+    this.registrationForm = this.formbuilder.group({
+        name: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          CustomValidators.patternValidator(/^([^0-9]*)$/, { hasLetters: true })
+        ])],
+        email: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(4),
+          Validators.email
+        ])],
+        birthdate: ['', Validators.required],
+        courseId: ['', Validators.required]
+      });
+  }
 
   ngOnInit(): void {
 
