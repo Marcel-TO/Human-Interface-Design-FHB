@@ -12,14 +12,14 @@ import {
 import { StoreService } from '../../shared/store.service';
 import { BackendService } from '../../shared/backend.service';
 import {
-  MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldModule,
 } from '@angular/material/form-field';
-import { DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
+import { ErrorStateMatcher, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { CustomValidators } from '../../shared/custom-validator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-data',
@@ -32,31 +32,16 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    NgbPopoverModule
   ], // Import der benötigten Module
   providers: [
     MatDatepickerModule  ], // Provider für das Datum
   templateUrl: './add-data.component.html',
   styleUrls: ['./add-data.component.css'],
 })
-export class AddDataComponent implements OnInit {
+export class AddDataComponent {
     public registrationForm: FormGroup;
-    nameFormControl = new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        CustomValidators.patternValidator(/^([^0-9]*)$/, { hasLetters: true}) // Regex expression for everything except numbers
-      ]));
       matcher = new MyErrorStateMatcher();
-      emailFormControl = new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(4),
-        Validators.email
-      ]));
-      birthdateFormControl = new FormControl<Date | null>(null, Validators.compose([
-        Validators.required,
-      ]));
-      courseIdFormControl = new FormControl('', Validators.compose([
-        Validators.required,
-      ]));
 
   constructor(
     private formbuilder: FormBuilder,
@@ -77,10 +62,6 @@ export class AddDataComponent implements OnInit {
         birthdate: ['', Validators.required],
         courseId: ['', Validators.required]
       });
-  }
-
-  ngOnInit(): void {
-
   }
 
   onSubmit() {

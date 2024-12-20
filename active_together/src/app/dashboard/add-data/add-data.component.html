@@ -1,6 +1,10 @@
 <div class="add-data-container">
   <h2 class="add-data-title">Zum Kurs anmelden!</h2>
-  <form [formGroup]="registrationForm" class="add-data-form">
+  <form
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit()"
+    class="add-data-form"
+  >
     <mat-form-field class="add-data-form-field">
       <mat-label>Name</mat-label>
       <input
@@ -86,6 +90,9 @@
       class="add-data-submit-button"
       type="submit"
       [disabled]="!registrationForm.valid"
+      placement="top"
+      ngbPopover="Vielen Dank, dass du dich für den Kurs angemeldet hast!"
+      popoverTitle="Registrierung Abgeschlossen"
     >
       Erfassen
     </button>
