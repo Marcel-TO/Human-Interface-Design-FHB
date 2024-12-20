@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { StoreService } from '../../shared/store.service';
 import { BackendService } from '../../shared/backend.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'app-data',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, MatTooltipModule],
   templateUrl: './data.component.html',
   styleUrl: './data.component.css'
 })
