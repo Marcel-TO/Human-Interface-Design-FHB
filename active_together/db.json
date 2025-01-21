@@ -71,29 +71,45 @@
   ],
   "registrations": [
     {
-      "id": 1,
-      "name": "Testuser",
-      "birthdate": "2024-11-13",
-      "courseId": "_iL775j"
-    },
-    {
       "name": "Julia Schabasser",
       "courseId": "_iL775i",
       "birthdate": "1995-02-23",
+      "submitDatetime": "2025-01-20T12:20:26.422Z",
       "id": 2
     },
     {
       "name": "Julia Schabasser",
       "courseId": "_iL775a",
       "birthdate": "1995-02-23",
+      "submitDatetime": "2025-01-19T12:20:26.422Z",
       "id": 3
     },
     {
-      "name": "Blob",
-      "email": "blob@gmx.at",
-      "birthdate": "2024-12-18T23:00:00.000Z",
-      "courseId": "_iL775a",
+      "name": "TestUser",
+      "agreeNewsletter": false,
+      "email": "2410859010@hochschule-burgenland.at",
+      "birthdate": "2025-01-14T23:00:00.000Z",
+      "courseId": "_iL775i",
+      "submitDatetime": "2025-01-21T12:20:26.422Z",
       "id": 4
+    },
+    {
+      "name": "TestUser",
+      "agreeNewsletter": false,
+      "email": "2410859010@hochschule-burgenland.at",
+      "birthdate": "2025-01-14T23:00:00.000Z",
+      "courseId": "_iL775j",
+      "submitDatetime": "2025-01-22T12:20:26.422Z",
+      "id": 5
+    },
+    {
+      "name": "ddasf",
+      "agreeNewsletter": false,
+      "email": "daf@daf",
+      "birthdate": "2024-12-31T23:00:00.000Z",
+      "courseId": "_iL775j",
+      "submitDatetime": "2025-01-21T12:20:26.422Z",
+      "id": 6
     }
   ]
 }

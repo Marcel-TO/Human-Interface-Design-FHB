@@ -20,6 +20,11 @@ import { CustomValidators } from '../../shared/custom-validator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
+
 
 @Component({
   selector: 'app-add-data',
@@ -32,7 +37,10 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    NgbPopoverModule
+    NgbPopoverModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatButtonModule
   ], // Import der benötigten Module
   providers: [
     MatDatepickerModule  ], // Provider für das Datum
@@ -54,17 +62,26 @@ export class AddDataComponent {
           Validators.minLength(3),
           CustomValidators.patternValidator(/^([^0-9]*)$/, { hasLetters: true })
         ])],
+        agreeNewsletter: false,
         email: ['', Validators.compose([
-          Validators.required,
           Validators.minLength(4),
           Validators.email
         ])],
         birthdate: ['', Validators.required],
-        courseId: ['', Validators.required]
+        courseId: ['', Validators.required],
+        submitDatetime: new Date(),
       });
   }
 
   onSubmit() {
+    // format the date column
+    this.registrationForm.value.birthdate = new Date(
+      this.registrationForm.value.birthdate
+    ).toISOString();
+
+    // set the current submit date
+    this.registrationForm.value.submitDatetime = new Date().toISOString();
+
     if (this.registrationForm.valid) {
       this.backendService.addRegistration(
         this.registrationForm.value,

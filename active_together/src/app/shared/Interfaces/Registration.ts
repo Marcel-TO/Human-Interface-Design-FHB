@@ -7,4 +7,5 @@ export interface Registration {
     birthdate: string,
     course: Course,
     courseId: number,
+    submitDatetime: Date,
   }

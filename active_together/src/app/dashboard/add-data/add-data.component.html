@@ -1,100 +1,121 @@
 <div class="add-data-container">
   <h2 class="add-data-title">Zum Kurs anmelden!</h2>
-  <form
-    [formGroup]="registrationForm"
-    (ngSubmit)="onSubmit()"
-    class="add-data-form"
-  >
-    <mat-form-field class="add-data-form-field">
-      <mat-label>Name</mat-label>
-      <input
-        matInput
-        formControlName="name"
-        [errorStateMatcher]="matcher"
-        placeholder="Name"
-      />
-      <mat-hint>Fehler sind sofort sichtbar bei Eingabe.</mat-hint>
-      <mat-error *ngIf="registrationForm.get('name')?.hasError('hasLetters')">
-        Der Name darf nur Buchstaben enthalten
-      </mat-error>
-      <mat-error *ngIf="registrationForm.get('name')?.hasError('minlength')">
-        Der Name muss mindestens 3 Zeichen lang sein
-      </mat-error>
-      <mat-error *ngIf="!registrationForm.get('name')?.hasError('required')">
-        Bitte gib deinen Namen ein
-      </mat-error>
-      <mat-error *ngIf="registrationForm.get('name')?.hasError('required')">
-        Name ist <strong>verpflichtend</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="add-data-form-field">
-      <input
-        matInput
-        placeholder="E-Mail"
-        formControlName="email"
-        [errorStateMatcher]="matcher"
-        required
-      />
-      <mat-error
-        class="error"
-        *ngIf="registrationForm.get('email')?.hasError('required')"
-      >
-        E-Mail ist <strong>verpflichtend</strong>
-      </mat-error>
-      <mat-error *ngIf="registrationForm.get('email')?.hasError('minlength')">
-        Die E-Mail muss mindestens 4 Zeichen lang sein
-      </mat-error>
-      <mat-error *ngIf="registrationForm.get('email')?.hasError('email')">
-        Das schaut nicht nach einer E-Mail Addresse aus
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="add-data-form-field">
-      <input
-        matInput
-        [matDatepicker]="picker"
-        placeholder="Geburtsdatum"
-        formControlName="birthdate"
-        [errorStateMatcher]="matcher"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error
-        class="error"
-        *ngIf="registrationForm.get('birthdate')?.hasError('required')"
-      >
-        Geburtsdatum ist <strong>verpflichtend</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="add-data-form-field">
-      <mat-label>Kurs</mat-label>
-      <mat-select formControlName="courseId" [errorStateMatcher]="matcher">
-        <mat-option value="" disabled>Bitte auswählen</mat-option>
-        <mat-option
-          *ngFor="let course of storeService.courses"
-          [value]="course.id"
-          >{{ course.name }}, {{ course.instructor }}</mat-option
-        >
-      </mat-select>
-      <mat-error
-        class="error"
-        *ngIf="registrationForm.get('courseId')?.hasError('required')"
-      >
-        Kurs ist <strong>verpflichtend</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <button
-      class="add-data-submit-button"
-      type="submit"
-      [disabled]="!registrationForm.valid"
-      placement="top"
-      ngbPopover="Vielen Dank, dass du dich für den Kurs angemeldet hast!"
-      popoverTitle="Registrierung Abgeschlossen"
+  <mat-dialog-content>
+    <form
+      [formGroup]="registrationForm"
+      (ngSubmit)="onSubmit()"
+      class="add-data-form"
     >
-      Erfassen
-    </button>
-  </form>
+      <mat-form-field class="add-data-form-field">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          [errorStateMatcher]="matcher"
+          placeholder="Name"
+        />
+        <mat-hint>Fehler sind sofort sichtbar bei Eingabe.</mat-hint>
+        <mat-error *ngIf="registrationForm.get('name')?.hasError('hasLetters')">
+          Der Name darf nur Buchstaben enthalten
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('name')?.hasError('minlength')">
+          Der Name muss mindestens 3 Zeichen lang sein
+        </mat-error>
+        <mat-error *ngIf="!registrationForm.get('name')?.hasError('required')">
+          Bitte gib deinen Namen ein
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('name')?.hasError('required')">
+          Name ist <strong>verpflichtend</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="newsletter-row">
+        <mat-form-field class="add-data-form-field">
+          <input
+            matInput
+            placeholder="E-Mail"
+            formControlName="email"
+            [errorStateMatcher]="matcher"
+            [disabled]="!registrationForm.get('agreeNewsletter')?.value"
+            required
+          />
+          <mat-error
+            class="error"
+            *ngIf="
+              registrationForm.get('email')?.hasError('required') &&
+              registrationForm.get('agreeNewsletter')?.value
+            "
+          >
+            E-Mail ist <strong>verpflichtend</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registrationForm.get('email')?.hasError('minlength') &&
+              registrationForm.get('agreeNewsletter')?.value
+            "
+          >
+            Die E-Mail muss mindestens 4 Zeichen lang sein
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registrationForm.get('email')?.hasError('email') &&
+              registrationForm.get('agreeNewsletter')?.value
+            "
+          >
+            Das schaut nicht nach einer E-Mail Addresse aus
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox formControlName="agreeNewsletter"
+          >Newsletter</mat-checkbox
+        >
+      </div>
+
+      <mat-form-field class="add-data-form-field">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Geburtsdatum"
+          formControlName="birthdate"
+          [errorStateMatcher]="matcher"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          class="error"
+          *ngIf="registrationForm.get('birthdate')?.hasError('required')"
+        >
+          Geburtsdatum ist <strong>verpflichtend</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="add-data-form-field">
+        <mat-label>Kurs</mat-label>
+        <mat-select formControlName="courseId" [errorStateMatcher]="matcher">
+          <mat-option value="" disabled>Bitte auswählen</mat-option>
+          <mat-option
+            *ngFor="let course of storeService.courses"
+            [value]="course.id"
+            >{{ course.name }}, {{ course.instructor }}</mat-option
+          >
+        </mat-select>
+        <mat-error
+          class="error"
+          *ngIf="registrationForm.get('courseId')?.hasError('required')"
+        >
+          Kurs ist <strong>verpflichtend</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        class="add-data-submit-button"
+        type="submit"
+        [disabled]="!registrationForm.valid"
+        placement="top"
+        ngbPopover="Vielen Dank, dass du dich für den Kurs angemeldet hast!"
+        popoverTitle="Registrierung Abgeschlossen"
+      >
+        Erfassen
+      </button>
+    </form>
+  </mat-dialog-content>
 </div>

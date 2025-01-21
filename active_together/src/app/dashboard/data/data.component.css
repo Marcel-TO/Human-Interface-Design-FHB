@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+mat-card {
+  background-color: transparent;
+}
+
 .data-container {
   width: 100%;
   margin: 0;
@@ -38,6 +42,14 @@
   padding: 0;
 }
 
+.col-sort {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 .data-col:hover {
   transform: scale(1.04);
   transition: all 0.3s;
@@ -59,18 +71,23 @@
 }
 
 .registration-table-container {
-  margin: 4rem 0;
+  margin: 4rem 0 0 0;
 }
 
 .pagination-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 1rem 0;
   transition: all 0.3s;
 }
 
 .pagination-container button.active {
   background-color: #38bdf8;
   color: white;
+}
+
+.delete-button:hover {
+  color: #ff0000;
+  transition: all 0.2s;
+  transform: scale(1.1);
 }

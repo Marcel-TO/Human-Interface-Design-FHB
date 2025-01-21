@@ -22,7 +22,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.backendService.getCourses();
+      this.storeService.coursesLoading = true;
+      this.storeService.registrationsLoading = true;
+      this.backendService.getCourses();
     this.backendService.getRegistrations(this.storeService.currentPage);
   }
 }
